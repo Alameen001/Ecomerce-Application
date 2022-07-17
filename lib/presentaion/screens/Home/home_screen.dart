@@ -9,6 +9,9 @@ import 'package:shopx/presentaion/screens/Home/widget/poster_img.dart';
 import 'package:shopx/presentaion/screens/Login/login.dart';
 import 'package:shopx/presentaion/screens/Search/search.dart';
 
+
+var scaffoldKey = GlobalKey<ScaffoldState>();
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -16,6 +19,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+          key: scaffoldKey,
         drawer: Drawer(),
         appBar: PreferredSize(
           
@@ -32,7 +36,9 @@ class HomeScreen extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    IconButton(onPressed: () {}, icon: Icon(Icons.menu)),
+                    IconButton(onPressed: () {
+                       scaffoldKey.currentState?.openDrawer();
+                    }, icon: Icon(Icons.menu)),
                     Spacer(),
                     AppbarTitlename(),
                     Spacer(),

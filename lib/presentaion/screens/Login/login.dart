@@ -1,11 +1,28 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:get/get.dart';
+import 'package:shopx/Screen_home.dart';
+import 'package:shopx/Services/Auth_service.dart';
+import 'package:shopx/presentaion/screens/Home/home_screen.dart';
 import 'package:shopx/presentaion/screens/Home/widget/appbar.dart';
 import 'package:shopx/presentaion/screens/Login/SignUp.dart';
+import 'package:shopx/presentaion/widgets/TextForm/textform.dart';
 import 'package:shopx/presentaion/widgets/user_adress.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class LoginScreen extends StatefulWidget {
+  LoginScreen({Key? key}) : super(key: key);
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController emailController = TextEditingController();
+
+  TextEditingController passwordController = TextEditingController();
+
+  bool isLoading =false;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +57,8 @@ class LoginScreen extends StatelessWidget {
                   TextSpan(
                       text: '  Sign Up ',
                       style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Color.fromARGB(255, 189, 50, 40))),
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 189, 50, 40))),
                 ],
               ),
             ),
@@ -48,12 +66,41 @@ class LoginScreen extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
-          TextInputfield(hinttext: "Enter Your Email"),
-          TextInputfield(hinttext: "Enter Your password"),
+          TextInputfield(
+            hinttext: "Enter Your Email",
+            Tcontroller: emailController,
+          ),
+          TextInputfield(
+            hinttext: "Enter Your password",
+            Tcontroller: passwordController,
+          ),
           SizedBox(
             height: 20,
           ),
-          ElevatedButton(onPressed: () {}, child: Text("LOGIN")),
+         isLoading ? CircularProgressIndicator() : ElevatedButton(
+              onPressed: () async {
+                setState(() {
+                  isLoading =true;
+                });
+                if (emailController.text == " " ||
+                    passwordController.text == "") {
+                  Get.snackbar("All Feilds are Required !", "",
+                      backgroundColor: Colors.red);
+                } else {
+                  User? result = await AuthService()
+                      .Login(emailController.text, passwordController.text);
+                  if (result != null) {
+                    print("Sucsuss");
+                  
+                    print(result.email);
+                  Get.offUntil(MaterialPageRoute(builder: (context)=>ScreenHome()), (route) => false);
+                  }
+                }
+                setState(() {
+                  isLoading =false;
+                });
+              },
+              child: Text("LOGIN")),
           SizedBox(
             height: 15,
           ),
@@ -83,29 +130,44 @@ class LoginScreen extends StatelessWidget {
           SizedBox(
             height: 15,
           ),
-             ElevatedButton(
-                              onPressed: () {},
-                              style: ElevatedButton.styleFrom(
-                                side: BorderSide(
-                                    width: 1.0, ),
-                                primary: Colors.white,
-                                elevation: 4,
-                                fixedSize: const Size(330, 45),
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Image.network("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEje2W2RoAmh0FstNyDTXmUasNURW3_f5UIQ&usqp=CAU",
-                                   height: 40,
-                                  ),
-                                  Text(
-                                    "Login with google",style: TextStyle(color: Colors.black),
-                                   
-                                  ),
-                                ],
-                              ),
-                            ),
+
+
+         isLoading? CircularProgressIndicator() : SignInButton(Buttons.Google,text: "Continue with Google" ,onPressed: ()async{
+          setState(() {
+            isLoading =true;
+          });
+            await AuthService().SignwithGoogle();
+             Get.offUntil(MaterialPageRoute(builder: (context)=>ScreenHome()), (route) => false);
+            setState(() {
+              isLoading =false;
+            });
+
+
+          },),
+          // ElevatedButton(
+          //   onPressed: () {},
+          //   style: ElevatedButton.styleFrom(
+          //     side: BorderSide(
+          //       width: 1.0,
+          //     ),
+          //     primary: Colors.white,
+          //     elevation: 4,
+          //     fixedSize: const Size(330, 45),
+          //   ),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //     children: [
+          //       Image.network(
+          //         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEje2W2RoAmh0FstNyDTXmUasNURW3_f5UIQ&usqp=CAU",
+          //         height: 40,
+          //       ),
+          //       Text(
+          //         "Login with google",
+          //         style: TextStyle(color: Colors.black),
+          //       ),
+          //     ],
+          //   ),
+          // ),
         ],
       ),
     );

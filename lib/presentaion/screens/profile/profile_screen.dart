@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:shopx/Services/Auth_service.dart';
+import 'package:shopx/presentaion/screens/Login/login.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -13,7 +16,36 @@ class ProfileScreen extends StatelessWidget {
         ),
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () async {
+                // await AuthService().SignOut();
+                //   Get.offUntil(MaterialPageRoute(builder: (context)=>LoginScreen()), (route) => false);
+                // Get.defaultDialog(
+                //           title: "logout",
+                // textConfirm: "Confirm",
+                //   textCancel: "Cancel",
+                //    barrierDismissible: false,
+
+                // );
+
+             
+    Get.dialog(
+      AlertDialog(
+        title: const Text('Dialog'),
+        content: const Text('This is a dialog'),
+        actions: [
+          TextButton(
+            child: const Text("Close"),
+            onPressed: () => Get.back(),
+          ),
+           TextButton(
+            child: const Text("fgrfgfgf"),
+            onPressed: () => Get.back(),
+          )
+        ],
+      ),
+    );
+
+              },
               icon: Icon(
                 Icons.logout,
                 color: Colors.black,
@@ -47,15 +79,20 @@ class ProfileScreen extends StatelessWidget {
                           Text(
                             "Ameen",
                             style: TextStyle(
-                              fontSize: 20,fontWeight: FontWeight.w600
-                            ),
+                                fontSize: 20, fontWeight: FontWeight.w600),
                           ),
-                          SizedBox(height: 5,),
+                          SizedBox(
+                            height: 5,
+                          ),
                           Text("ameenaash36@gmail.com"),
-                          SizedBox(height: 5,),
-                          Text("9809706617",  style: TextStyle(
-                              fontSize: 15,fontWeight: FontWeight.w800
-                            ),),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            "9809706617",
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.w800),
+                          ),
                         ],
                       ),
                       Spacer(),
@@ -76,29 +113,49 @@ class ProfileScreen extends StatelessWidget {
                     "Orders",
                   ),
                   subtitle: Text("Check your order status'"),
-                  trailing: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_drop_down_rounded)),
-                ),SizedBox(height: 10,),
-                 ListTile(
+                  trailing: IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.arrow_drop_down_rounded)),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                ListTile(
                   title: Text(
                     "Whishlist",
                   ),
                   subtitle: Text("Check your order status'"),
-                  trailing: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_drop_down_rounded)),
-                ),SizedBox(height: 10,),
-                 ListTile(
+                  trailing: IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.arrow_drop_down_rounded)),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                ListTile(
                   title: Text(
                     "Adress",
                   ),
                   subtitle: Text("Check your order status'"),
-                  trailing: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_drop_down_rounded)),
-                ),SizedBox(height: 10,),
-                 ListTile(
+                  trailing: IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.arrow_drop_down_rounded)),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                ListTile(
                   title: Text(
                     "Terms & Conditions",
                   ),
                   subtitle: Text("Check your order status'"),
-                  trailing: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_drop_down_rounded)),
-                ),SizedBox(height: 10,),
+                  trailing: IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.arrow_drop_down_rounded)),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
               ],
             ),
           )

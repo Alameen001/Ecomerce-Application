@@ -133,11 +133,11 @@ class ProductList extends StatelessWidget {
                     fontWeight: FontWeight.w400),
               ),
               
-               centerTitle: true,
-              titlePadding: EdgeInsetsDirectional.only(
-                start: 25,
-                bottom: 10
-              ),
+              
+              // titlePadding: EdgeInsetsDirectional.only(
+              //   start: 25,
+              //   bottom: 10
+              // ),
             ),
             // leading: IconButton(onPressed: (){}, icon: Icon(Icons.abc)),
           ),

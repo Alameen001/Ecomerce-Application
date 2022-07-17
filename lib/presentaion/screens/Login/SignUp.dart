@@ -1,9 +1,30 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:shopx/presentaion/widgets/user_adress.dart';
+import 'package:get/get.dart';
+import 'package:shopx/Screen_home.dart';
+import 'package:shopx/Services/Auth_service.dart';
+import 'package:shopx/presentaion/screens/Home/home_screen.dart';
 
-class SighnUp extends StatelessWidget {
-  const SighnUp({ Key? key }) : super(key: key);
+import 'package:shopx/presentaion/widgets/TextForm/textform.dart';
+
+
+class SighnUp extends StatefulWidget {
+ SighnUp({ Key? key }) : super(key: key);
+
+  @override
+  State<SighnUp> createState() => _SighnUpState();
+}
+
+class _SighnUpState extends State<SighnUp> {
+   TextEditingController emailController = TextEditingController();
+
+  TextEditingController passwordController = TextEditingController();
+
+     TextEditingController nameController = TextEditingController();
+
+  TextEditingController conformpasswordController = TextEditingController();
+
+  bool IsLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +60,34 @@ class SighnUp extends StatelessWidget {
                           ])),
                      ),
                      SizedBox(height: 30,),
-                     TextInputfield(hinttext: "Enter your Name"),
-                      TextInputfield(hinttext: "Enter your Email"),
-                       TextInputfield(hinttext: " Creat Password"),
-                        TextInputfield(hinttext: "Confirm Password"),
+                     TextInputfield(hinttext: "Enter your Name", Tcontroller: nameController,),
+                      TextInputfield(hinttext: "Enter your Email", Tcontroller: emailController,),
+                       TextInputfield(hinttext: " Creat Password", Tcontroller: passwordController,),
+                        TextInputfield(hinttext: "Confirm Password", Tcontroller:conformpasswordController,),
                            SizedBox(height: 30,),
-                           ElevatedButton(onPressed: (){}, child: Text("Sign Up"))
+                          IsLoading ? CircularProgressIndicator() : ElevatedButton(onPressed: ()async{
+
+                            setState(() {
+                              IsLoading =true;
+                            });
+                            if(emailController.text==" " ||passwordController.text==""){
+                              Get.snackbar("All Feilds are Required !", "",backgroundColor: Colors.red);
+                            }else if(passwordController.text !=conformpasswordController.text){
+                               Get.snackbar("Password dont Match !", "",backgroundColor: Colors.red);
+
+                            }else{
+                             User? result= await AuthService().register(emailController.text, passwordController.text);
+                             if(result !=null){
+                              print("Sucsuss");
+                              print(result.email);
+                               Get.offUntil(MaterialPageRoute(builder: (context)=>ScreenHome()), (route) => false);
+                             }
+                            }setState(() {
+                              IsLoading=false;
+                            });
+
+
+                           }, child: Text("Sign Up"))
 
                    ],
                  )

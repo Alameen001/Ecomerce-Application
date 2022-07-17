@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopx/presentaion/screens/Payment/payment.dart';
+import 'package:shopx/presentaion/widgets/TextForm/textform.dart';
 
 class UserAdressScreen extends StatelessWidget {
   UserAdressScreen({Key? key}) : super(key: key);
+
+
+     TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+     TextEditingController nameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
 
   final selectedvalue = 0;
 
@@ -61,8 +68,8 @@ class UserAdressScreen extends StatelessWidget {
                       height: 20,
                     ),
                     Text("Contact Info"),
-                    TextInputfield(hinttext: "Name"),
-                    TextInputfield(hinttext: "Phone Number(+91)"),
+                    TextInputfield(hinttext: "Name", Tcontroller: nameController,),
+                    TextInputfield(hinttext: "Phone Number(+91)", Tcontroller: phoneController,),
                     SizedBox(
                       height: 20,
                     ),
@@ -75,14 +82,14 @@ class UserAdressScreen extends StatelessWidget {
                     Text("Adress Info"),
                     Row(
                       children: [
-                        Expanded(child: TextInputfield(hinttext: "Pincode")),
-                        Expanded(child: TextInputfield(hinttext: "City")),
+                        Expanded(child: TextInputfield(hinttext: "Pincode", Tcontroller: phoneController,)),
+                        Expanded(child: TextInputfield(hinttext: "City", Tcontroller: nameController,)),
                       ],
                     ),
-                    TextInputfield(hinttext: "State"),
-                    TextInputfield(hinttext: "Locality/Area/Street"),
-                    TextInputfield(hinttext: "Flat no/Building Name"),
-                    TextInputfield(hinttext: "landMark"),
+                    TextInputfield(hinttext: "State", Tcontroller: nameController,),
+                    TextInputfield(hinttext: "Locality/Area/Street", Tcontroller: nameController,),
+                    TextInputfield(hinttext: "Flat no/Building Name", Tcontroller: nameController,),
+                    TextInputfield(hinttext: "landMark", Tcontroller: nameController,),
                     SizedBox(
                       height: 20,
                     ),
@@ -167,36 +174,4 @@ class UserAdressScreen extends StatelessWidget {
   }
 }
 
-class TextInputfield extends StatelessWidget {
-  TextInputfield(
-      {Key? key,
-      required this.hinttext,
-      this.textinputtype = TextInputType.name,
-      this.PaddingHorizondal = 12.0,
-      this.PaddingVertical = 8.0})
-      : super(key: key);
 
-  final String hinttext;
-  TextInputType textinputtype;
-  final double PaddingHorizondal;
-  final double PaddingVertical;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: PaddingHorizondal, vertical: PaddingVertical),
-      child: TextFormField(
-        keyboardType: textinputtype,
-        decoration: InputDecoration(
-          isDense: true,
-          hintText: hinttext,
-          fillColor: Colors.grey[250],
-          filled: true,
-          border: OutlineInputBorder(borderSide: BorderSide.none),
-          focusedBorder: OutlineInputBorder(),
-        ),
-      ),
-    );
-  }
-}
