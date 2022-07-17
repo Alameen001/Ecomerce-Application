@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopx/controller/home_controller.dart';
 import 'package:shopx/presentaion/screens/Home/home_screen.dart';
-import 'package:shopx/presentaion/screens/cart/cart_items.dart';
+import 'package:shopx/presentaion/screens/cart/cart.dart';
 import 'package:shopx/presentaion/screens/catagories/catagories_screen.dart';
 import 'package:shopx/presentaion/screens/profile/profile_screen.dart';
 import 'package:shopx/presentaion/screens/whishlist/whishlist_screen.dart';

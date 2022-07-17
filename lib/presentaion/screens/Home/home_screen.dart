@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shopx/presentaion/screens/Home/widget/Barand.dart';
 import 'package:shopx/presentaion/screens/Home/widget/appbar.dart';
 import 'package:shopx/presentaion/screens/Home/widget/circleAvatae_sliding.dart';
 import 'package:shopx/presentaion/screens/Home/widget/fashinModel.dart';
 import 'package:shopx/presentaion/screens/Home/widget/headline.dart';
 import 'package:shopx/presentaion/screens/Home/widget/poster_img.dart';
+import 'package:shopx/presentaion/screens/Login/login.dart';
 import 'package:shopx/presentaion/screens/Search/search.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -35,7 +37,10 @@ class HomeScreen extends StatelessWidget {
                     AppbarTitlename(),
                     Spacer(),
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          print("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+                          Get.to(LoginScreen());
+                        },
                         icon: Icon(Icons.notifications_active_rounded)),
                   ],
                 ),

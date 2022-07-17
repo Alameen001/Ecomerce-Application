@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:shopx/presentaion/screens/product_Details/product_detailed_screen.dart';
 
 class ProductList extends StatelessWidget {
   ProductList({Key? key}) : super(key: key);
@@ -37,52 +39,178 @@ class ProductList extends StatelessWidget {
     "799/-",
   ];
 
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Scaffold(
+  //     appBar: AppBar(
+  //       title: Text(
+  //         "ProductList",
+  //         style: TextStyle(
+  //             color: Colors.black, fontSize: 18, fontWeight: FontWeight.w400),
+  //       ),
+  //       centerTitle: true,
+  //     ),
+  //     body: Padding(
+  //       padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 15.0),
+  //       child: GridView.builder(
+  //           itemCount: 6,
+  //           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+  //               crossAxisCount: 2,
+  //               crossAxisSpacing: 10,
+  //               mainAxisSpacing: 10,
+  //               childAspectRatio: 1.0 / 2.0
+  //               //childAspectRatio: 3 / 4.4,
+  //               ),
+  //           itemBuilder: (BuildContext context, int index) {
+  //             return GestureDetector(
+  //               onTap: () {
+  //                 Get.to(ProductDetail());
+  //               },
+  //               child: Column(
+  //                 crossAxisAlignment: CrossAxisAlignment.start,
+  //                 children: [
+  //                   Stack(
+  //                     alignment: AlignmentDirectional.bottomEnd,
+  //                     children: [
+  //                       Container(
+  //                         height: 220,
+  //                         decoration: BoxDecoration(
+  //                           borderRadius: BorderRadius.circular(10),
+  //                           image: DecorationImage(
+  //                               fit: BoxFit.cover,
+  //                               image: NetworkImage(
+  //                                 ProductlistItems[index],
+  //                               )),
+  //                         ),
+  //                       ),
+  //                       IconButton(
+  //                           onPressed: () {},
+  //                           icon: Icon(Icons.favorite_outline_outlined))
+  //                     ],
+  //                   ),
+  //                   SizedBox(
+  //                     height: 10,
+  //                   ),
+  //                   Text(
+  //                     Productitle[index],
+  //                     style: TextStyle(
+  //                         color: Colors.red,
+  //                         fontSize: 18,
+  //                         fontWeight: FontWeight.w400),
+  //                   ),
+  //                   Text(
+  //                     ProductDiscription[index],
+  //                     style: TextStyle(
+  //                         color: Colors.grey, fontWeight: FontWeight.w400),
+  //                   ),
+  //                   Text(
+  //                     Productrate[index],
+  //                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+  //                   )
+  //                 ],
+  //               ),
+  //             );
+  //           }),
+  //     ),
+  //   );
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("ProductList",style: TextStyle(color: Colors.black,fontSize: 18,fontWeight: FontWeight.w400),),
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.only(left:15.0,right: 15.0,top:15.0),
-        child: GridView.builder(
-            itemCount: 6,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount:2,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              childAspectRatio: 1.0/2.0
-              //childAspectRatio: 3 / 4.4,
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            expandedHeight: 130,
+            // backgroundColor: Colors.amber,
+            pinned: true,
+            flexibleSpace: FlexibleSpaceBar(
+              title: Text(
+                "ProductList",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400),
+              ),
+              
+               centerTitle: true,
+              titlePadding: EdgeInsetsDirectional.only(
+                start: 25,
+                bottom: 10
+              ),
             ),
-            itemBuilder: (BuildContext context, int index) {
-              return Column(crossAxisAlignment: CrossAxisAlignment.start,
-                
-                children: [
-                  Stack(
-                    alignment: AlignmentDirectional.bottomEnd,
-                    children: [
-                      Container(
-                        height: 220,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: NetworkImage(
-                                ProductlistItems[index],
-                              )),
-                        ),
+            // leading: IconButton(onPressed: (){}, icon: Icon(Icons.abc)),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding:
+                  const EdgeInsets.only(left: 15.0, right: 15.0, ),
+              child: GridView.builder(
+                  itemCount: 6,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                      childAspectRatio: 1.0 / 2.0
+                      //childAspectRatio: 3 / 4.4,
                       ),
-                      IconButton(onPressed: (){}, icon: Icon(Icons.favorite_outline_outlined))
-                    ],
-                  ),
-                  SizedBox(height: 10,),
-                  Text(Productitle[index],style: TextStyle(color: Colors.red,fontSize: 18,fontWeight: FontWeight.w400),),
-                  Text(ProductDiscription[index],style: TextStyle(color: Colors.grey,fontWeight: FontWeight.w400),),
-                  Text(Productrate[index],style: TextStyle(fontSize: 20,fontWeight: FontWeight.w700),)
-                ],
-              );
-            }),
+                  primary: false,
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext context, int index) {
+                    return GestureDetector(
+                      onTap: () {
+                        Get.to(ProductDetail());
+                      },
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Stack(
+                            alignment: AlignmentDirectional.bottomEnd,
+                            children: [
+                              Container(
+                                height: 220,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: NetworkImage(
+                                        ProductlistItems[index],
+                                      )),
+                                ),
+                              ),
+                              IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(Icons.favorite_outline_outlined))
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            Productitle[index],
+                            style: TextStyle(
+                                color: Colors.red,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w400),
+                          ),
+                          Text(
+                            ProductDiscription[index],
+                            style: TextStyle(
+                                color: Colors.grey,
+                                fontWeight: FontWeight.w400),
+                          ),
+                          Text(
+                            Productrate[index],
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.w700),
+                          )
+                        ],
+                      ),
+                    );
+                  }),
+            ),
+          )
+        ],
       ),
     );
   }
