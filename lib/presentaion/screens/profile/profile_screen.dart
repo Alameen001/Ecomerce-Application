@@ -16,35 +16,44 @@ class ProfileScreen extends StatelessWidget {
         ),
         actions: [
           IconButton(
-              onPressed: () async {
-                // await AuthService().SignOut();
-                //   Get.offUntil(MaterialPageRoute(builder: (context)=>LoginScreen()), (route) => false);
+              onPressed: () {
                 // Get.defaultDialog(
                 //           title: "logout",
                 // textConfirm: "Confirm",
+
                 //   textCancel: "Cancel",
                 //    barrierDismissible: false,
 
                 // );
 
-             
-    Get.dialog(
-      AlertDialog(
-        title: const Text('Dialog'),
-        content: const Text('This is a dialog'),
-        actions: [
-          TextButton(
-            child: const Text("Close"),
-            onPressed: () => Get.back(),
-          ),
-           TextButton(
-            child: const Text("fgrfgfgf"),
-            onPressed: () => Get.back(),
-          )
-        ],
-      ),
-    );
+                Get.dialog(
+                  AlertDialog(
+                    title: const Text('Dialog'),
+                    content: const Text('This is a dialog'),
+                    actions: [
+                      TextButton(
+                        child: const Text(
+                          "Close",
+                        ),
+                        onPressed: () => Get.back(),
+                      ),
+                      TextButton(
+                        child: const Text(
+                          "Log out",
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        onPressed: () async {
+                          await AuthService().SignOut();
 
+                          Get.offUntil(
+                              MaterialPageRoute(
+                                  builder: (context) => LoginScreen()),
+                              (route) => false);
+                        },
+                      ),
+                    ],
+                  ),
+                );
               },
               icon: Icon(
                 Icons.logout,
